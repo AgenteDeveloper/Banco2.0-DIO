@@ -1,22 +1,19 @@
-import textwrap
-
 def menu():
-    menu = """\n
-    Seja bem vindo ao Banco TB!
+    return input(
+        """
+        Seja bem vindo ao Banco TB!
 
-    Selecione uma das operações abaixo para continuar:
+        Selecione uma das operações abaixo para continuar:
 
-    [D] - Depositar
-    [S] - Sacar
-    [E] - Extrato
-    [N] - Novo Cadastro
-    [C] - Nova Conta
-    [Q] - Sair
+        [D] - Depositar
+        [S] - Sacar
+        [E] - Extrato
+        [N] - Novo Cadastro
+        [C] - Nova Conta
+        [Q] - Sair
 
-    =>"""
-    return input(menu)
-
-
+        => """
+    )
 
 def saque(*,saldo,valor,extrato,limite,numero_saques,limite_diario):
     execede_saldo = valor > saldo
@@ -66,20 +63,19 @@ def exibir_extrato(saldo,/,*, extrato):
 
 def cadastro_usuario(usuarios):
     cpf = input("Informe seu CPF para consulta de disponibilidade, apenas numeros: ")
-    usuario = filtro_usuario(cpf,usuarios)
+    usuario = filtro_usuario(cpf, usuarios)
 
     if usuario:
         print("< Usuário já Cadastrado, tente novamente >")
         return
     
-  
     nome = input("Insira o seu nome completo: ")
     data_nascimento = input("Insira sua data de nascimento (dia, mes, ano): ")
     endereco = input("Insira o seu endereco com logradouro - nº - CEP e cidade/sigla estado ")
 
-    usuarios.append({"nome" : nome, "data_nascimento" : data_nascimento, "endereco" : endereco})
-
-print("<Usuário Criado com sucesso! Bem vindo ao nosso banco!>")
+    usuarios.append({"cpf": cpf, "nome": nome, "data_nascimento": data_nascimento, "endereco": endereco})
+    
+    print("<Usuário Criado com sucesso! Bem vindo ao nosso banco!>")
 
 def cadastro_conta(agencia,numero_conta,usuarios):
     cpf = input("Informe o CPF do usuario: ")
@@ -132,7 +128,7 @@ def main():
             
         elif opcao == "E":
 
-            exibir_extrato = extrato(saldo, extrato=extrato)
+            exibir_extrato(saldo, extrato=extrato)
 
 
             # print("\n<<<<<<Extrato>>>>>")
@@ -157,63 +153,5 @@ def main():
         else:
          print("Operação inexistente, tente novamente com uma das opções disponiveis")   
 
-        
-
-
-
-    # while True:
-    #     opcao = input(menu)
-
-    #     if opcao == "D":
-    #         valor = float(input("Insira o valor a ser depositado: "))
-
-    #         if valor > 0:
-    #             saldo += valor
-    #             extrato += f"Depósito: R$ {valor:.2f} \n"
-    #             print("Valor depositado com sucesso!")
-    #         else:
-    #             print("Valor inserido inválido, tente novamente") 
-
-
-    #     elif opcao == "S":
-    #         valor = float(input("Insira o valor a ser sacado: "))
-
-    #         execede_saldo = valor > saldo
-
-    #         execede_limite = valor > limite
-
-    #         execede_diario = numero_saques >= limite_diario
-
-    #         if execede_saldo:
-    #             print("Valor inserido é maior do que seu saldo. Tente novamente")
-            
-    #         elif execede_limite:
-    #             print("Valor maior que limite permitido. Tente novamente")
-            
-    #         elif execede_diario:
-    #             print("Limite diário alcançado, tente novamente amanhã.")
-
-    #         elif valor > 0:
-    #             saldo -= valor
-
-    #             extrato += f"Saque: R$ {valor:.2f} \n"
-
-    #             numero_saques += 1
-
-    #             print("Valor sacado com sucesso")
-    #         else:
-    #             print("Valor inserido inválido, tente novamente") 
-
-    #     elif opcao == "E":
-    #         print("\n<<<<<<Extrato>>>>>")
-    #         print("Sem movimentações na conta" if not extrato else extrato)
-    #         print(f"Saldo: R$ {saldo:.2f} \n")
-    #         print("<<<<<<<<<>>>>>>>>>")
-
-
-
-    #     elif opcao == "Q":
-    #         break    
-
-    # else:
-    #     print("Operação inexistente, tente novamente com uma das opções disponiveis")        
+if __name__ == "__main__":
+    main()
